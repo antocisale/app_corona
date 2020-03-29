@@ -1,10 +1,17 @@
 import React from 'react';
-import InfectedTable from './Components/InfectedTable/InfectedTable'
+import {BrowserRouter} from 'react-router-dom';
+import Links from './Sections/LInks';
+import SwitchComponent from './Sections/SwitchComponent';
+
+
 
 function App() {
   return (
     <div>
-      <InfectedTable></InfectedTable>
+      <BrowserRouter>
+        <Links></Links>
+        <SwitchComponent></SwitchComponent>
+      </BrowserRouter>
     </div>
   );
 }

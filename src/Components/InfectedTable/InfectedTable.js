@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
-import {API_INFECTED} from '../../config';
+import {API_INFECTED, handleError} from '../../config';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAngleDown} from '@fortawesome/free-solid-svg-icons';
 import {faAngleUp} from '@fortawesome/free-solid-svg-icons';
@@ -8,14 +8,10 @@ import {faAngleUp} from '@fortawesome/free-solid-svg-icons';
 
 import './InfectedTable.scss';
 import Download from '../Download/Download';
-import Chart from '../Chart/Chart';
-
-const handleError = err => {
-    alert(`Error getting data from Api.`);
-};
+import LineChart from '../Charts/LineChart';
 
 const InfectedTable = () =>{
-    const [infected,setInfected] = useState([]);
+    const [infectedPeople,setInfectedPeople] = useState([]);
     const [order, setOrder] = useState(faAngleDown);
     
     useEffect(()=>{
@@ -25,7 +21,7 @@ const InfectedTable = () =>{
     const componentDidMount = async()=>{
         try {
         const res = await Axios.get(API_INFECTED);
-                setInfected(res.data);
+            setInfectedPeople(res.data);
         } catch (err) {
             handleError();
         }
@@ -55,22 +51,19 @@ const InfectedTable = () =>{
     }
     
     const sort = ()=>{
-        let clon = [...infected];
+        let clon = [...infectedPeople];
         if(order ===faAngleDown){
             clon.sort((a, b) => (a.age > b.age) ? 1 : -1);
-            setInfected (clon);
+            setInfectedPeople (clon);
             setOrder(faAngleUp);
         }else{
             clon.sort((a, b) => (a.age > b.age) ? -1 : 1);
-            setInfected (clon);
+            setInfectedPeople (clon);
             setOrder(faAngleDown);
         }
 
     }
 
-    const renderInfected = list =>{
-        list.map()
-    }
     return(
         <div>
             <table>
@@ -86,21 +79,21 @@ const InfectedTable = () =>{
                     </tr>
                 </thead>
                 <tbody>
-                {infected.map(person =>{
-            return <tr key={person.id} className={aliveClass(person.live)}>
-                <td>{person.first_name}</td>
-                <td>{person.last_name}</td>
-                <td>{person.country}</td>
-                <td>{isAlive(person.live)}</td>
-                <td>{person.age}</td>
-                <td>{setDate(person.infect_date)}</td>
-                <td>{getSex(person.female)}</td>
-                </tr> 
-            })}
+                    {infectedPeople.map(person =>{
+                        return <tr key={person.id} className={aliveClass(person.live)}>
+                            <td>{person.first_name}</td>
+                            <td>{person.last_name}</td>
+                            <td>{person.country}</td>
+                            <td>{isAlive(person.live)}</td>
+                            <td>{person.age}</td>
+                            <td>{setDate(person.infect_date)}</td>
+                            <td>{getSex(person.female)}</td>
+                            </tr> 
+                    })}
                 </tbody>
             </table>
-            <Download data={infected}></Download>
-            <Chart data={infected}></Chart>
+            <Download data={infectedPeople}></Download>
+            <LineChart data={infectedPeople}></LineChart>
         </div>
         )
 }

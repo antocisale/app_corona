@@ -5,7 +5,7 @@ const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
-const Chart = props=> {
+const LineChart = props=> {
 
     const manageData = data =>{
         let matriz = {};
@@ -29,7 +29,7 @@ const Chart = props=> {
 	const options = {
         animationEnabled: true,
         exportEnabled: true,
-        theme: "light2", // "light1", "dark1", "dark2"
+        theme: "light2",
         title:{
             text: "Evolution of infected people by date"
         },
@@ -55,4 +55,4 @@ const Chart = props=> {
 		</div>
 		);
 }
-export default Chart;                     
+export default LineChart;                     
