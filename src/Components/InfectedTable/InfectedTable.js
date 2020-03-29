@@ -9,19 +9,23 @@ import {faAngleUp} from '@fortawesome/free-solid-svg-icons';
 import './InfectedTable.scss';
 import Download from '../Download/Download';
 import LineChart from '../Charts/LineChart';
+import NewInfected from '../Form/Form';
 
 const InfectedTable = () =>{
     const [infectedPeople,setInfectedPeople] = useState([]);
     const [order, setOrder] = useState(faAngleDown);
+    const [counter,setCounter] = useState(0);
+
     
     useEffect(()=>{
-        componentDidMount();
-    },[])
+        getInfectedPeople();
+    },[counter])
 
-    const componentDidMount = async()=>{
+    const getInfectedPeople = async()=>{
         try {
         const res = await Axios.get(API_INFECTED);
             setInfectedPeople(res.data);
+            setCounter(res.data.length);
         } catch (err) {
             handleError();
         }
@@ -66,6 +70,7 @@ const InfectedTable = () =>{
 
     return(
         <div>
+            <h3>Total number of infected People: <span>{counter}</span></h3>
             <table>
                 <thead>
                     <tr>
@@ -94,6 +99,7 @@ const InfectedTable = () =>{
             </table>
             <Download data={infectedPeople}></Download>
             <LineChart data={infectedPeople}></LineChart>
+            <NewInfected setCounter={setCounter} counter={counter}></NewInfected>
         </div>
         )
 }
