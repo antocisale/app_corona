@@ -8,6 +8,7 @@ import {faAngleUp} from '@fortawesome/free-solid-svg-icons';
 
 import './InfectedTable.scss';
 import Download from '../Download/Download';
+import Chart from '../Chart/Chart';
 
 const handleError = err => {
     alert(`Error getting data from Api.`);
@@ -99,6 +100,7 @@ const InfectedTable = () =>{
                 </tbody>
             </table>
             <Download data={infected}></Download>
+            <Chart data={infected}></Chart>
         </div>
         )
 }
