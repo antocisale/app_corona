@@ -10,7 +10,7 @@ const SwitchComponent = () =>{
         <Switch>
             <Route exact path="/">
                 <div>
-                    <img src={hero}/>
+                    <img src={hero} alt="hero"/>
                 </div>
             </Route>
             <Route path="/infected" component={InfectedTable} />
