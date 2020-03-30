@@ -1,35 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import Axios from 'axios';
-import {API_INFECTED, handleError} from '../../config';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faAngleDown} from '@fortawesome/free-solid-svg-icons';
-import {faAngleUp} from '@fortawesome/free-solid-svg-icons';
-
-
-import './InfectedTable.scss';
+import React, { useState, useEffect, useContext } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import infectedContext from '../../infectedContext';
+import '../../Sass/InfectedTable.scss';
 import Download from '../Download/Download';
 import LineChart from '../Charts/LineChart';
 import NewInfected from '../Form/Form';
 
 const InfectedTable = () =>{
-    const [infectedPeople,setInfectedPeople] = useState([]);
-    const [order, setOrder] = useState(faAngleDown);
-    const [counter,setCounter] = useState(0);
-
-    
-    useEffect(()=>{
-        getInfectedPeople();
-    },[counter])
-
-    const getInfectedPeople = async()=>{
-        try {
-        const res = await Axios.get(API_INFECTED);
-            setInfectedPeople(res.data);
-            setCounter(res.data.length);
-        } catch (err) {
-            handleError();
-        }
-    }
+    const { infectedPeople, setInfectedPeople, counter, setCounter, showModal } = useContext(infectedContext);
+    const [ order, setOrder ] = useState(faAngleDown);
 
     const aliveClass = state =>{
         let aliveClass = state ? "alive" : "not-alive";
@@ -38,14 +19,11 @@ const InfectedTable = () =>{
 
     const isAlive = state =>{
         let alive = state ? "Yes":"No";
-
         return alive;
-    
     }
 
     const getSex = sex =>{
         let gender = sex ? "Female" : "Male";
-
         return gender;
     }
 
@@ -98,8 +76,9 @@ const InfectedTable = () =>{
                 </tbody>
             </table>
             <Download data={infectedPeople}></Download>
-            <LineChart data={infectedPeople}></LineChart>
+            <a href={"/infected/graphic"}>Show Graphic</a>
             <NewInfected setCounter={setCounter} counter={counter}></NewInfected>
+            <button onClick={showModal}>Add</button>
         </div>
         )
 }
