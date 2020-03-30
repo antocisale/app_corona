@@ -1,0 +1,27 @@
+.header{
+    background-color: $azul;
+    height:10vh;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    padding-left:25px;
+    padding-right:25px;
+    nav{
+        width:40%;
+        display:flex;
+        justify-content: space-evenly;
+        a{
+            color: $blanco;
+            transition: color 1s ease;
+            height: 25px;
+            transition: border-bottom 0.2s ease;
+            box-sizing: border-box;
+            &:hover{
+                color:$naranja;
+                border-bottom: 2px solid $naranja;
+                transition: color 1s ease;
+                transition: border-bottom 0.2s ease;
+            }
+        }
+    }
+}

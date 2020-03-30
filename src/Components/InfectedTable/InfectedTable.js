@@ -2,8 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine } from '@fortawesome/free-solid-svg-icons';
 import infectedContext from '../../infectedContext';
-import '../../Sass/InfectedTable.scss';
+import '../../App.scss';
 import Download from '../Download/Download';
 import LineChart from '../Charts/LineChart';
 import NewInfected from '../Form/Form';
@@ -47,9 +49,16 @@ const InfectedTable = () =>{
     }
 
     return(
-        <div>
-            <h3>Total number of infected People: <span>{counter}</span></h3>
-            <table>
+        <div className="infected">
+            <header className="content-header">
+                <h2>People infected by Coronavirus</h2>
+                <h3>Total number of infected people: <span>{counter}</span></h3>
+                <div>
+                    <Download data={infectedPeople}></Download>
+                    <a href={"/infected/graphic"}><span className="table-buttons"><FontAwesomeIcon icon={faChartLine}/> Show Graphic</span></a>
+                </div>
+            </header>
+            <table className="table">
                 <thead>
                     <tr>
                         <th>First Name</th>
@@ -74,11 +83,9 @@ const InfectedTable = () =>{
                             </tr> 
                     })}
                 </tbody>
-            </table>
-            <Download data={infectedPeople}></Download>
-            <a href={"/infected/graphic"}>Show Graphic</a>
+            </table>            
+            <button onClick={showModal} className="button add"><FontAwesomeIcon icon={faPlus}/></button>
             <NewInfected setCounter={setCounter} counter={counter}></NewInfected>
-            <button onClick={showModal}>Add</button>
         </div>
         )
 }

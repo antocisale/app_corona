@@ -3,10 +3,10 @@ import { BrowserRouter } from 'react-router-dom';
 import Axios from 'axios';
 import { API_INFECTED, API_COUNTRIES, handleError } from './config';
 import infectedContext from './infectedContext';
-import Links from './Sections/LInks';
+import Links from './Sections/Links';
 import SwitchComponent from './Sections/SwitchComponent';
 import useSwitchBoolean from './Hooks/switchBoolean';
-
+import './App.scss';
 
 
 const App = ()=> {
@@ -14,7 +14,7 @@ const App = ()=> {
   const [ counter, setCounter ] = useState(0);
   const [ infectedCountries, setInfectedCountries ] = useState([]);
   const [ show, toggleShow ] = useSwitchBoolean(false);
-
+ 
   const showModal = ()=>{
       toggleShow();
   };

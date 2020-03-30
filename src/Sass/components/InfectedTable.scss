@@ -1,0 +1,73 @@
+.infected{
+    display:flex;
+    flex-direction: column;
+    overflow-y: initial;
+    
+}
+
+.content-header{
+    border-top:2px solid $blanco;
+    text-align: center;
+    background-color: $azul;
+    padding-bottom: 10px;
+    h2{
+        color:$naranja;
+        font-size: 35px;
+    }
+    h3{
+        text-align:right;
+        color:$blanco;
+        padding-right: 25px;
+    }
+    div{
+        display:flex;
+        justify-content: flex-end;
+        padding-right: 25px;
+    }
+}
+
+
+.table{
+    border-collapse: collapse;
+    border-bottom: 25px solid $azul;
+    thead{
+        background-color:$naranja;
+        tr{
+            height:50px;
+            th{
+                color:$azul;
+                font-size: 18px;
+                border-left: 2px solid $azul;
+                button{
+                    background-color:transparent;
+                    border:none;
+                    color:$azul;
+                    font-size: 18px;
+                    font-weight:700;
+                    &:hover{
+                        cursor:pointer;
+                    }
+                    &:focus{
+                        outline-style: none;
+                    }
+                }
+            }
+        }
+    }
+    tbody{
+        tr{
+            height: 28px;
+            td{
+                border-left: 2px solid $azul;
+                text-align:center;
+            }
+        }
+
+    }
+
+}
+
+.not-alive{
+    background-color: $rojo;
+    color:$azul;
+}

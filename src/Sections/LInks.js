@@ -1,10 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import '../App.scss';
+
 
 const Links = ()=>{
     return(
-        <div>
+        <div className="header">
+            <div>
+                <h1 className="title">Coronavirus</h1>
+            </div>
             <nav>
                 <Link to="/">
                     Home
