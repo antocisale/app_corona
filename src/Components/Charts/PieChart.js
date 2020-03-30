@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import CanvasJSReact from '../../canvasjs.react';
+import infectedContext from '../../infectedContext';
 
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-const PieChart = props=> {
-    
+const PieChart = () => {
+    const { infectedCountries } = useContext(infectedContext);
+
     const manageData = data =>{
         let matriz = data.map(country =>{
             return {y:country.infected, indexLabel: country.name}
@@ -24,7 +26,7 @@ const PieChart = props=> {
 			toolTipContent: "{y} - #percent %",
 			yValueFormatString: "###,###",
 			legendText: "{indexLabel}",
-            dataPoints: manageData(props.data)
+            dataPoints: manageData(infectedCountries)
         }]
 	}
 
@@ -32,6 +34,7 @@ const PieChart = props=> {
     return (
 		<div>
 			<CanvasJSChart options = {options}/>
+            <a href={"/countries"}>Return</a>
 		</div>
 		);
 }

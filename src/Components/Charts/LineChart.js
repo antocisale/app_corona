@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import CanvasJSReact from '../../canvasjs.react';
+import infectedContext from '../../infectedContext';
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
-const LineChart = props=> {
+
+const LineChart = () => {
+    const { infectedPeople } = useContext(infectedContext);
 
     const manageData = data =>{
         let matriz = {};
@@ -21,6 +24,7 @@ const LineChart = props=> {
             return {x:new Date(fecha), y: acumulador+= matriz[fecha]}
         })
         return matriz;
+        console.log(matriz)
     }
 
 
@@ -44,12 +48,13 @@ const LineChart = props=> {
         data: [{
             type: "line",
             toolTipContent: "Date {x}: Infected {y}",
-            dataPoints: manageData(props.data)
+            dataPoints: manageData(infectedPeople),
         }]
 	}
 	return (
 		<div>
 			<CanvasJSChart options = {options}/>
+            <a href={"/infected"}>Return</a>
 		</div>
 		);
 }
