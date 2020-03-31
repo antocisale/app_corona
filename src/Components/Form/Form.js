@@ -4,7 +4,7 @@ import { API_INFECTED, handleError } from '../../config';
 import infectedContext from '../../infectedContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import '../../Sass/Form.scss';
+import '../../App.scss';
 
 
 
@@ -99,93 +99,105 @@ const NewInfected = () =>{
 
     return(
         <div className={showHideClassName}>
-            <header>
-                <h2>Add new infected person</h2>
-                <button onClick={showModal}>
-                    <FontAwesomeIcon icon={faTimes}/>
-                </button>
-            </header>
-            <form>
-                <label htmlFor="first_name">
+            <div className="form-container">
+                <header className="form-header">
+                    <div>
+                        <button onClick={showModal} className="close-button">
+                            <FontAwesomeIcon icon={faTimes}/>
+                        </button>
+                    </div>
+                    <h2>Add new infected person</h2>
+                </header>
+                <form className="form">
+                    <label htmlFor="first_name" className="name-fields">First Name</label>
                     <input 
                         type="text" 
                         id="first_name" 
+                        className="complete-field"
                         value={firstName} 
-                        placeholder="First Name" 
                         onChange={e=>{setFirstName(e.target.value)}}
                         required/>
-                </label>
-                <label htmlFor="last_name">
+                    <label htmlFor="last_name" className="name-fields">Last Name</label>
                     <input 
                         type="text" 
                         id="last_name" 
+                        className="complete-field"
                         value={lastName} 
                         placeholder="Last Name" 
                         onChange={e=>{setLastName(e.target.value)}}
                         required/>
-                </label>
-                <label htmlFor="country">
+                    <label htmlFor="country" className="name-fields">Country</label>
                     <input 
                         type="text" 
                         id="country" 
+                        className="complete-field"
                         value={country} 
                         placeholder="Country" 
                         onChange={e=>{setCountry(e.target.value)}}
                         required/>
-                </label>
-                <label htmlFor="age">
+                    <div className="age-gender-container">
+                        <div className="column-container">
+                            <label htmlFor="age" className="name-fields">Age</label>
+                            <input 
+                            type="number" 
+                            id="age" 
+                            value={age} 
+                            min="0"
+                            placeholder="Age"
+                            className="complete-field age-field" 
+                            onChange={e=>{setAge(parseInt(e.target.value))}}/>
+                        </div>
+                        <div className="column-container">
+                            <span className="name-fields">Gender</span>
+                            <div>
+                                <label htmlFor="male" className="name-fields">Male </label>
+                                <input 
+                                    id="male"
+                                    type="radio" 
+                                    value="false"
+                                    checked={gender === "false"} 
+                                    onChange={e=>{setGender(e.target.value)}}/>
+                                <label htmlFor="female" className="name-fields">Female</label>
+                                <input 
+                                    id="female"
+                                    type="radio" 
+                                    value="true"
+                                    checked={gender === "true"}
+                                    onChange={e=>{setGender(e.target.value)}}/>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <span className="name-fields">Is the person alive?</span>
+                    <div className="alive-answers-container">
+                        <div>
+                            <label htmlFor="alive" className="name-fields">Yes</label>
+                            <input 
+                                id="alive"
+                                type="radio" 
+                                value="true"
+                                checked={alive === "true"} 
+                                onChange={e=>{setAlive(e.target.value)}}/>
+                        </div>
+                        <div>
+                            <label htmlFor="dead" className="name-fields">No</label>
+                            <input 
+                                id="dead"
+                                type="radio" 
+                                value="false"
+                                checked={alive === "false"}
+                                onChange={e=>{setAlive(e.target.value)}}/>
+                        </div>
+                    </div>
+                    
                     <input 
-                        type="number" 
-                        id="age" 
-                        value={age} 
-                        min="0"
-                        placeholder="Age" 
-                        onChange={e=>{setAge(parseInt(e.target.value))}}
-                        />
-                </label>
-                <label htmlFor="alive">
-                    <input 
-                        id="alive"
-                        type="radio" 
-                        value="true"
-                        checked={alive === "true"} 
-                        onChange={e=>{setAlive(e.target.value)}}/>
-                    Alive
-                </label>
-                <label htmlFor="dead">
-                    <input 
-                        id="dead"
-                        type="radio" 
-                        value="false"
-                        checked={alive === "false"}
-                        onChange={e=>{setAlive(e.target.value)}}/>
-                    Not Alive
-                </label>
-                <label htmlFor="male">
-                    <input 
-                        id="male"
-                        type="radio" 
-                        value="false"
-                        checked={gender === "false"} 
-                        onChange={e=>{setGender(e.target.value)}}/>
-                    Male
-                </label>
-                <label htmlFor="female">
-                    <input 
-                        id="female"
-                        type="radio" 
-                        value="true"
-                        checked={gender === "true"}
-                        onChange={e=>{setGender(e.target.value)}}/>
-                    Female
-                </label>
-
-                <input 
-                    type="submit" 
-                    placeholder="Add"
-                    onClick={e=> {e.preventDefault();
-                        addNewInfected(firstName, lastName,country,age, alive,gender)}}/>
-            </form>
+                        type="submit" 
+                        value="Add"
+                        onClick={e=> {e.preventDefault();
+                            addNewInfected(firstName, lastName,country,age, alive,gender)}}
+                        className="button home"/>
+                </form>
+            </div>
         </div>
 
     )

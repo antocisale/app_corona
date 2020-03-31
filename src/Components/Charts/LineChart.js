@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUndoAlt } from '@fortawesome/free-solid-svg-icons';
 import CanvasJSReact from '../../canvasjs.react';
 import infectedContext from '../../infectedContext';
+import '../../App.scss';
+
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
-
-
 
 const LineChart = () => {
     const { infectedPeople } = useContext(infectedContext);
@@ -33,7 +35,7 @@ const LineChart = () => {
         exportEnabled: true,
         theme: "light2",
         title:{
-            text: "Evolution of infected people by date"
+            text: ""
         },
         axisY: {
             title: "Number of Infected People",
@@ -53,8 +55,15 @@ const LineChart = () => {
 	}
 	return (
 		<div>
-			<CanvasJSChart options = {options}/>
-            <a href={"/infected"}>Return</a>
+            <header className="content-header">
+                <h2>Evolution of infected people by date</h2>
+                <div>
+                    <a href={"/infected"}><span className="table-buttons"><FontAwesomeIcon icon={faUndoAlt}/> Back</span></a>
+                </div>
+            </header>
+            <div className="chart-container">
+			    <CanvasJSChart options = {options}/>
+            </div>
 		</div>
 		);
 }
