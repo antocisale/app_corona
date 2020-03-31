@@ -40,3 +40,38 @@ a{
     margin-bottom: 30px;
 }
 
+@include tablet{
+    .main{
+        font-size:60px;
+    }
+    .sub{
+        font-size: 35px;
+        margin-bottom: 50px;
+    }
+    .hero{
+        div{
+            flex-wrap: wrap;
+            height: 100px;
+        }
+    }
+}
+
+@include phone{
+    .main{
+        font-size:40px;
+    }
+    .sub{
+        font-size:25px;
+        margin-bottom: 50px;
+    }
+    .hero{
+        div{
+            flex-wrap: wrap;
+            height:150px;
+            width:80%;
+            a{
+                height: 25px;
+            }
+        }
+    }
+}

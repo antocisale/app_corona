@@ -78,3 +78,25 @@
         outline-style: none;
     }
 }
+
+.burger-menu-button{
+    background-color: transparent;
+    color:$blanco;
+    border:none;
+    transition: color 0.5s ease;
+    font-size: 20px;
+    &:hover{
+        color:$naranja;
+        cursor:pointer;
+        transition: color 0.5s ease;
+    }
+    &:focus{
+        outline-style: none;
+    }
+}
+
+@include phone{
+    .button{
+        padding:10px; 
+    }
+}
